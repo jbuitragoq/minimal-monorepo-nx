@@ -10,7 +10,7 @@ import { SimpleUserService } from '../../services/simple-user.service';
     templateUrl: './courses.html',
     styleUrl: './courses.scss'
 })
-export default class CoursesComponent implements OnInit, OnDestroy {
+export default class Courses implements OnInit, OnDestroy {
 
     public courses: Course[] = [];
     public loading = true;

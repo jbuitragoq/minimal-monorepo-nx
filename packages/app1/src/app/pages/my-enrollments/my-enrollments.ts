@@ -9,7 +9,7 @@ import { SimpleUserService } from '../../services/simple-user.service';
     templateUrl: './my-enrollments.html',
     styleUrl: './my-enrollments.scss'
 })
-export default class MyEnrollmentsComponent implements OnInit, OnDestroy {
+export default class MyEnrollments implements OnInit, OnDestroy {
 
     public enrollments: EnrollmentWithDetails[] = [];
     public loading = true;

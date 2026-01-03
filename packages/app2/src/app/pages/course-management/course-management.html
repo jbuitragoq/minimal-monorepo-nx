@@ -1,0 +1,85 @@
+<div class="course-management-container">
+    <div class="page-header">
+        <h2>📚 Gestión de Cursos</h2>
+        <p>Administra los cursos disponibles en la plataforma</p>
+    </div>
+
+    <!-- Formulario para crear/editar curso -->
+    <div class="course-form" [class.editing]="editingCourse">
+        <h3>{{ editingCourse ? 'Editar Curso' : 'Crear Nuevo Curso' }}</h3>
+        <form (ngSubmit)="saveCourse()">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="title">Título del Curso:</label>
+                    <input type="text" id="title" [(ngModel)]="courseForm.title" name="title" required
+                        placeholder="Ej: Introducción a Angular"
+                        [class.error]="courseForm.title.length > 0 && !courseForm.title.trim()">>
+                </div>
+                <div class="form-group">
+                    <label for="teacher">Profesor:</label>
+                    <input type="text" id="teacher" [(ngModel)]="courseForm.teacher" name="teacher" required
+                        placeholder="Ej: Juan Pérez"
+                        [class.error]="courseForm.teacher.length > 0 && !courseForm.teacher.trim()">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Descripción:</label>
+                <textarea id="description" [(ngModel)]="courseForm.description" name="description" required
+                    placeholder="Describe el contenido y objetivos del curso" rows="3"
+                    [class.error]="courseForm.description.length > 0 && !courseForm.description.trim()">
+        </textarea>
+            </div>
+            <div class="form-actions">
+                <shared-button type="submit" variant="success" [disabled]="isSubmitting || !isFormValid()">
+                    {{ isSubmitting ? 'Guardando...' : (editingCourse ? 'Actualizar' : 'Crear') }}
+                </shared-button>
+                @if (editingCourse) {
+                <shared-button type="button" variant="secondary" (click)="cancelEdit()">
+                    Cancelar
+                </shared-button>
+                }
+            </div>
+        </form>
+    </div>
+
+    <!-- Vista de cards de cursos -->
+    <div class="courses-preview">
+        <h3>Vista Previa de Cursos</h3>
+        @if (!loading && !error && courses.length > 0) {
+        <div class="courses-grid">
+            @for (course of courses; track course.id) {
+            <shared-course-card [course]="course" [showActions]="false">
+                <shared-button variant="primary" (click)="editCourse(course)">
+                    Editar
+                </shared-button>
+                <shared-button variant="danger" (click)="deleteCourse(course)">
+                    Eliminar
+                </shared-button>
+            </shared-course-card>
+            }
+        </div>
+        }
+    </div>
+
+    <!-- Tabla de cursos -->
+    <div class="courses-table">
+        @if (!loading && !error) {
+        <shared-table [data]="courses" [columns]="tableColumns" [actions]="tableActions"
+            noDataMessage="No hay cursos creados aún. ¡Crea el primer curso!">
+        </shared-table>
+        }
+
+        @if (loading) {
+        <div class="loading">
+            <p>Cargando cursos...</p>
+        </div>
+        }
+
+        @if (error) {
+        <div class="error">
+            <p>❌ Error: {{ error }}</p>
+            <shared-button (click)="loadCourses()">Reintentar</shared-button>
+        </div>
+        }
+    </div>
+</div>
