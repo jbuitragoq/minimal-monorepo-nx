@@ -8,6 +8,4 @@ import { NxWelcome } from './nx-welcome';
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {
-  protected title = 'app2';
-}
+export class App {}

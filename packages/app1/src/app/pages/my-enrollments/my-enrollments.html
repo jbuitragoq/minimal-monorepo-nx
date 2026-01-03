@@ -1,0 +1,28 @@
+<div class="enrollments-container">
+    <div class="page-header">
+        <h2>📋 Mis Inscripciones</h2>
+        <p>Aquí puedes ver todos los cursos en los que estás inscrito</p>
+    </div>
+
+    @if (!loading && !error) {
+    <shared-table
+        [data]="enrollments"
+        [columns]="tableColumns"
+        [actions]="tableActions"
+        noDataMessage="No tienes inscripciones aún. ¡Ve a la sección de cursos para inscribirte!">
+    </shared-table>
+    }
+
+    @if (loading) {
+    <div class="loading">
+        <p>Cargando tus inscripciones...</p>
+    </div>
+    }
+
+    @if (error) {
+    <div class="error">
+        <p>❌ Error: {{ error }}</p>
+        <shared-button (clickBtn)="loadEnrollments()">Reintentar</shared-button>
+    </div>
+    }
+</div>

@@ -1,3 +1,21 @@
-<!-- <app-nx-welcome></app-nx-welcome> -->
-<lib-ui-shared></lib-ui-shared>
-<router-outlet></router-outlet>
+<div class="app-container">
+    <header class="app-header">
+        <h1>🎓 Plataforma de Estudiantes</h1>
+        <div class="user-selector">
+            <label for="student-select">Usuario actual:</label>
+            <select id="student-select" (change)="onStudentChange($event)" [value]="currentStudentId">
+                @for (student of students; track student.id) {
+                <option [value]="student.id">{{student.name}}</option>
+                }
+            </select>
+        </div>
+        <nav>
+            <a routerLink="/courses" routerLinkActive="active">Cursos Disponibles</a>
+            <a routerLink="/my-enrollments" routerLinkActive="active">Mis Inscripciones</a>
+        </nav>
+    </header>
+
+    <main class="app-main">
+        <router-outlet></router-outlet>
+    </main>
+</div>

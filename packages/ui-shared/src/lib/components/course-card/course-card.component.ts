@@ -5,7 +5,7 @@ import { Course } from '@minimal-monorepo/utils-common';
     selector: 'shared-course-card',
     imports: [],
     templateUrl: './course-card.component.html',
-    styleUrl: './course-card.component.css'
+    styleUrl: './course-card.component.scss'
 })
 export class CourseCardComponent {
     @Input({ required: true }) course!: Course;
