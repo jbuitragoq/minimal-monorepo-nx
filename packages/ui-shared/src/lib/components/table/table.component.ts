@@ -1,26 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-
-export interface TableColumn {
-    key: string;
-    label: string;
-    sortable?: boolean;
-}
-
-export interface TableAction {
-    label: string;
-    icon?: string;
-    variant?: 'primary' | 'secondary' | 'success' | 'danger';
-    onClick: (item: any) => void;
-}
+import { TableAction, TableColumn } from '../../core/interfaces/table.interfaces';
 
 @Component({
-    selector: 'shared-table',
+    selector: 'lib-table',
     imports: [],
     templateUrl: './table.component.html',
     styleUrl: './table.component.scss'
 })
 export class TableComponent {
-    @Input({ required: true }) data: any[] = [];
+    @Input({ required: true }) data: unknown[] = [];
     @Input({ required: true }) columns: TableColumn[] = [];
     @Input() actions?: TableAction[];
     @Input() noDataMessage = 'No hay datos disponibles';
@@ -29,7 +17,7 @@ export class TableComponent {
     sortColumn: string | null = null;
     sortDirection: 'asc' | 'desc' = 'asc';
 
-    get sortedData(): any[] {
+    get sortedData(): unknown[] {
         if (!this.sortColumn) {
             return this.data;
         }

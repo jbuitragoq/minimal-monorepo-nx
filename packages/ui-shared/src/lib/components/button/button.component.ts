@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-    selector: 'shared-button',
+    selector: 'lib-button',
     imports: [],
     templateUrl: './button.component.html',
     styleUrl: './button.component.scss'

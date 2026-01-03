@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiService, Student } from '@minimal-monorepo/utils-common';
@@ -12,11 +12,13 @@ import { SimpleUserService } from './services/simple-user.service';
 })
 export class App implements OnInit {
 
-  protected title = 'Plataforma de Estudiantes';
+  
   public students: Student[] = [];
   public currentStudentId = '1'; // Valor por defecto simple
-
-  constructor(private readonly apiService: ApiService) {}
+  
+  protected title = 'Plataforma de Estudiantes';
+  
+  private readonly apiService = inject(ApiService);
 
   ngOnInit(): void {
     this.loadStudents();

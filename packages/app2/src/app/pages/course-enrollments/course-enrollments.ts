@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Course, EnrollmentWithDetails, ApiService } from '@minimal-monorepo/utils-common';
-import { TableComponent, TableColumn, ButtonComponent } from '@minimal-monorepo/ui-shared';
+import { TableComponent, ButtonComponent } from '@minimal-monorepo/ui-shared';
+import { TableColumn } from 'packages/ui-shared/src/lib/core/interfaces/table.interfaces';
 
 @Component({
     selector: 'course-enrollments-page',
@@ -26,7 +27,7 @@ export default class CourseEnrollments implements OnInit {
         { key: 'date', label: 'Fecha de Inscripción', sortable: true }
     ];
 
-    constructor(private readonly apiService: ApiService) { }
+    private readonly apiService = inject(ApiService);
 
     ngOnInit(): void {
         this.loadCourses();

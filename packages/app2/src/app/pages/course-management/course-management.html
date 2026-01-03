@@ -30,13 +30,13 @@
         </textarea>
             </div>
             <div class="form-actions">
-                <shared-button type="submit" variant="success" [disabled]="isSubmitting || !isFormValid()">
+                <lib-button type="submit" variant="success" [disabled]="isSubmitting || !isFormValid()">
                     {{ isSubmitting ? 'Guardando...' : (editingCourse ? 'Actualizar' : 'Crear') }}
-                </shared-button>
+                </lib-button>
                 @if (editingCourse) {
-                <shared-button type="button" variant="secondary" (click)="cancelEdit()">
+                <lib-button type="button" variant="secondary" (click)="cancelEdit()">
                     Cancelar
-                </shared-button>
+                </lib-button>
                 }
             </div>
         </form>
@@ -48,14 +48,14 @@
         @if (!loading && !error && courses.length > 0) {
         <div class="courses-grid">
             @for (course of courses; track course.id) {
-            <shared-course-card [course]="course" [showActions]="false">
-                <shared-button variant="primary" (click)="editCourse(course)">
+            <lib-course-card [course]="course" [showActions]="false">
+                <lib-button variant="primary" (click)="editCourse(course)">
                     Editar
-                </shared-button>
-                <shared-button variant="danger" (click)="deleteCourse(course)">
+                </lib-button>
+                <lib-button variant="danger" (click)="deleteCourse(course)">
                     Eliminar
-                </shared-button>
-            </shared-course-card>
+                </lib-button>
+            </lib-course-card>
             }
         </div>
         }
@@ -64,9 +64,9 @@
     <!-- Tabla de cursos -->
     <div class="courses-table">
         @if (!loading && !error) {
-        <shared-table [data]="courses" [columns]="tableColumns" [actions]="tableActions"
+        <lib-table [data]="courses" [columns]="tableColumns" [actions]="tableActions"
             noDataMessage="No hay cursos creados aún. ¡Crea el primer curso!">
-        </shared-table>
+        </lib-table>
         }
 
         @if (loading) {
@@ -78,7 +78,7 @@
         @if (error) {
         <div class="error">
             <p>❌ Error: {{ error }}</p>
-            <shared-button (click)="loadCourses()">Reintentar</shared-button>
+            <lib-button (click)="loadCourses()">Reintentar</lib-button>
         </div>
         }
     </div>

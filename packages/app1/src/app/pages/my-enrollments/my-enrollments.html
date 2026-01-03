@@ -5,12 +5,12 @@
     </div>
 
     @if (!loading && !error) {
-    <shared-table
+    <lib-table
         [data]="enrollments"
         [columns]="tableColumns"
         [actions]="tableActions"
         noDataMessage="No tienes inscripciones aún. ¡Ve a la sección de cursos para inscribirte!">
-    </shared-table>
+    </lib-table>
     }
 
     @if (loading) {
@@ -22,7 +22,7 @@
     @if (error) {
     <div class="error">
         <p>❌ Error: {{ error }}</p>
-        <shared-button (clickBtn)="loadEnrollments()">Reintentar</shared-button>
+        <lib-button (clickBtn)="loadEnrollments()">Reintentar</lib-button>
     </div>
     }
 </div>

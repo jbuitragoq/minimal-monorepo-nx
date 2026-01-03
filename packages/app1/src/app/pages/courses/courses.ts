@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Course, ApiService, CreateEnrollmentRequest } from '@minimal-monorepo/utils-common';
 import { CourseCardComponent, ButtonComponent } from '@minimal-monorepo/ui-shared';
@@ -19,8 +19,7 @@ export default class Courses implements OnInit, OnDestroy {
     public enrollmentStatus: { [courseId: string]: boolean } = {}; // Para trackear inscripciones
 
     private unsubscribe?: () => void;
-
-    constructor(private readonly apiService: ApiService) { }
+    private readonly apiService = inject(ApiService);
 
     ngOnInit(): void {
         this.loadCoursesAndEnrollments();

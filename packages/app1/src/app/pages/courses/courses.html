@@ -7,14 +7,14 @@
     @if (courses.length > 0) {
     <div class="courses-grid">
         @for (course of courses; track course.id) {
-        <shared-course-card [course]="course">
-            <shared-button
+        <lib-course-card [course]="course">
+            <lib-button
                 [variant]="getButtonVariant(course.id)"
                 [disabled]="!canEnroll(course.id)"
                 (click)="enrollInCourse(course.id)">
                 {{ isEnrolling ? 'Inscribiendo...' : getButtonText(course.id) }}
-            </shared-button>
-        </shared-course-card>
+            </lib-button>
+        </lib-course-card>
         }
     </div>
     }

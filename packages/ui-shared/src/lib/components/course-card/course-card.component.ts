@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Course } from '@minimal-monorepo/utils-common';
 
 @Component({
-    selector: 'shared-course-card',
+    selector: 'lib-course-card',
     imports: [],
     templateUrl: './course-card.component.html',
     styleUrl: './course-card.component.scss'

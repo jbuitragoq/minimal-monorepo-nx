@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { EnrollmentWithDetails, ApiService } from '@minimal-monorepo/utils-common';
-import { TableComponent, TableColumn, TableAction, ButtonComponent } from '@minimal-monorepo/ui-shared';
+import { TableComponent, ButtonComponent } from '@minimal-monorepo/ui-shared';
 import { SimpleUserService } from '../../services/simple-user.service';
+import { TableAction, TableColumn } from 'packages/ui-shared/src/lib/core/interfaces/table.interfaces';
 
 @Component({
     selector: 'my-enrollments-page',
@@ -14,17 +15,16 @@ export default class MyEnrollments implements OnInit, OnDestroy {
     public enrollments: EnrollmentWithDetails[] = [];
     public loading = true;
     public error: string | null = null;
-    private unsubscribe?: () => void;
 
     // Configuración de la tabla
-    tableColumns: TableColumn[] = [
+    public tableColumns: TableColumn[] = [
         { key: 'course.title', label: 'Curso', sortable: true },
         { key: 'course.teacher', label: 'Profesor', sortable: true },
         { key: 'date', label: 'Fecha de Inscripción', sortable: true },
         { key: 'course.description', label: 'Descripción' }
     ];
 
-    tableActions: TableAction[] = [
+    public tableActions: TableAction[] = [
         {
             label: 'Cancelar',
             variant: 'danger',
@@ -32,7 +32,8 @@ export default class MyEnrollments implements OnInit, OnDestroy {
         }
     ];
 
-    constructor(private apiService: ApiService) { }
+    private unsubscribe?: () => void;
+    private readonly apiService = inject(ApiService);
 
     ngOnInit(): void {
         this.loadEnrollments();
