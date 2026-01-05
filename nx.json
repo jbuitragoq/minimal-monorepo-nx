@@ -102,5 +102,40 @@
     "@nx/angular:component": {
       "style": "css"
     }
-  }
+  },
+  "projects": {
+    "app1": {
+      "tags": ["scope:app"]
+    },
+    "app2": {
+      "tags": ["scope:app"]
+    },
+    "ui-shared": {
+      "tags": ["scope:ui"]
+    },
+    "utils-common": {
+      "tags": ["scope:utils"]
+    },
+    "server": {
+      "tags": ["scope:api"]
+    }
+  },
+  "dependencyConstraints": [
+    {
+      "sourceTag": "scope:app",
+      "onlyDependOnLibsWithTags": ["scope:ui", "scope:utils", "scope:api"]
+    },
+    {
+      "sourceTag": "scope:ui",
+      "onlyDependOnLibsWithTags": ["scope:utils", "scope:ui"]
+    },
+    {
+      "sourceTag": "scope:utils",
+      "onlyDependOnLibsWithTags": ["scope:utils"]
+    },
+    {
+      "sourceTag": "scope:api",
+      "onlyDependOnLibsWithTags": ["scope:utils"]
+    }
+  ]
 }
