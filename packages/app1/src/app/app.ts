@@ -12,7 +12,6 @@ import { SimpleUserService } from './services/simple-user.service';
 })
 export class App implements OnInit {
 
-  
   public students: Student[] = [];
   public currentStudentId = '1'; // Valor por defecto simple
   
